@@ -1,0 +1,58 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ModelList
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of ModelList is to create an S3 class ModelList which is a container of regression or other models. There are methods for summary and predict that can be used on this class. This was created for HW3 in PH290 at UCB.
+
+## Installation
+
+You can install this version of ModelList from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("madelineadee/PH290-ModelList")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(ModelList)
+
+# create two sets of data
+df <- mtcars
+sample <- sample(c(TRUE, FALSE), nrow(df), replace=TRUE, prob=c(0.5,0.5))
+train  <- df[sample, ]
+test   <- df[!sample, ]
+
+mod1 <- lm(mpg ~ cyl, train)
+mod2 <- lm(mpg ~ cyl + am, train)
+
+# create the ModelList container of models
+mList <- CreateModelList(mod1, mod2)
+
+# summary method for ModelList class
+summary(mList)
+
+# prediction method for ModelList class
+predict(mList, test)
+
+```
+
