@@ -31,7 +31,9 @@ devtools::install_github("madelineadee/PH290-ModelList")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to use the package:
+
+Setup and run models. 
 
 ```{r example}
 library(ModelList)
@@ -45,13 +47,29 @@ test   <- df[!sample, ]
 mod1 <- lm(mpg ~ cyl, train)
 mod2 <- lm(mpg ~ cyl + am, train)
 
-# create the ModelList container of models
+```
+
+Create the ModelList container of models.
+
+```{r}
+
 mList <- CreateModelList(mod1, mod2)
 
-# summary method for ModelList class
+
+```
+
+Summary method for ModelList class.
+
+```{r}
+
 summary(mList)
 
-# prediction method for ModelList class
+```
+
+Predict method for ModelList class.
+
+```{r}
+
 predict(mList, test)
 
 ```

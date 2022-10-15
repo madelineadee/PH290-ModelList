@@ -23,7 +23,9 @@ devtools::install_github("madelineadee/PH290-ModelList")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to use the package:
+
+Setup and run models.
 
 ``` r
 library(ModelList)
@@ -36,11 +38,19 @@ test   <- df[!sample, ]
 
 mod1 <- lm(mpg ~ cyl, train)
 mod2 <- lm(mpg ~ cyl + am, train)
+```
 
-# create the ModelList container of models
+Create the ModelList container of models.
+
+``` r
+
 mList <- CreateModelList(mod1, mod2)
+```
 
-# summary method for ModelList class
+Summary method for ModelList class.
+
+``` r
+
 summary(mList)
 #> [[1]]
 #> 
@@ -48,19 +58,19 @@ summary(mList)
 #> lm(formula = mpg ~ cyl, data = train)
 #> 
 #> Residuals:
-#>     Min      1Q  Median      3Q     Max 
-#> -3.4458 -1.8354 -0.6653  0.8847  6.1542 
+#>      Min       1Q   Median       3Q      Max 
+#> -2.11429 -1.05952  0.00476  0.79048  2.29524 
 #> 
 #> Coefficients:
 #>             Estimate Std. Error t value Pr(>|t|)    
-#> (Intercept)  37.1264     4.1228   9.005  8.5e-06 ***
-#> cyl          -2.7201     0.5973  -4.554  0.00138 ** 
+#> (Intercept)  30.1762     1.5537  19.422 5.50e-11 ***
+#> cyl          -1.8452     0.2364  -7.806 2.92e-06 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
-#> Residual standard error: 3.056 on 9 degrees of freedom
-#> Multiple R-squared:  0.6973, Adjusted R-squared:  0.6637 
-#> F-statistic: 20.74 on 1 and 9 DF,  p-value: 0.001379
+#> Residual standard error: 1.37 on 13 degrees of freedom
+#> Multiple R-squared:  0.8242, Adjusted R-squared:  0.8106 
+#> F-statistic: 60.93 on 1 and 13 DF,  p-value: 2.923e-06
 #> 
 #> 
 #> [[2]]
@@ -70,42 +80,42 @@ summary(mList)
 #> 
 #> Residuals:
 #>     Min      1Q  Median      3Q     Max 
-#> -3.6308 -1.9231 -0.6192  0.8231  5.9692 
+#> -2.0576 -0.7530 -0.3121  0.7515  2.5788 
 #> 
 #> Coefficients:
-#>             Estimate Std. Error t value Pr(>|t|)   
-#> (Intercept)   32.996      8.160   4.044  0.00372 **
-#> cyl           -2.196      1.078  -2.038  0.07592 . 
-#> am             2.219      3.733   0.594  0.56863   
+#>             Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept)  29.2121     1.6898  17.287 7.59e-10 ***
+#> cyl          -1.7318     0.2468  -7.018 1.40e-05 ***
+#> am            1.1909     0.9234   1.290    0.221    
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
-#> Residual standard error: 3.173 on 8 degrees of freedom
-#> Multiple R-squared:  0.7101, Adjusted R-squared:  0.6377 
-#> F-statistic:   9.8 on 2 and 8 DF,  p-value: 0.007058
+#> Residual standard error: 1.337 on 12 degrees of freedom
+#> Multiple R-squared:  0.8456, Adjusted R-squared:  0.8198 
+#> F-statistic: 32.85 on 2 and 12 DF,  p-value: 1.356e-05
+```
 
-# prediction method for ModelList class
+Predict method for ModelList class.
+
+``` r
+
 predict(mList, test)
 #>           [,1]     [,2]
-#>  [1,] 20.80556 22.03846
-#>  [2,] 20.80556 22.03846
-#>  [3,] 20.80556 19.81923
-#>  [4,] 15.36528 15.42692
-#>  [5,] 15.36528 15.42692
-#>  [6,] 26.24583 24.21154
-#>  [7,] 26.24583 24.21154
-#>  [8,] 20.80556 19.81923
-#>  [9,] 15.36528 15.42692
-#> [10,] 15.36528 15.42692
-#> [11,] 15.36528 15.42692
-#> [12,] 26.24583 26.43077
-#> [13,] 26.24583 26.43077
-#> [14,] 26.24583 24.21154
-#> [15,] 15.36528 15.42692
-#> [16,] 26.24583 26.43077
-#> [17,] 26.24583 26.43077
-#> [18,] 26.24583 26.43077
-#> [19,] 15.36528 17.64615
-#> [20,] 15.36528 17.64615
-#> [21,] 26.24583 26.43077
+#>  [1,] 19.10476 20.01212
+#>  [2,] 15.41429 15.35758
+#>  [3,] 22.79524 22.28485
+#>  [4,] 15.41429 15.35758
+#>  [5,] 15.41429 15.35758
+#>  [6,] 15.41429 15.35758
+#>  [7,] 22.79524 23.47576
+#>  [8,] 22.79524 23.47576
+#>  [9,] 22.79524 23.47576
+#> [10,] 15.41429 15.35758
+#> [11,] 15.41429 15.35758
+#> [12,] 22.79524 23.47576
+#> [13,] 22.79524 23.47576
+#> [14,] 22.79524 23.47576
+#> [15,] 15.41429 16.54848
+#> [16,] 15.41429 16.54848
+#> [17,] 22.79524 23.47576
 ```
